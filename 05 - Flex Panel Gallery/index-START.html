@@ -26,6 +26,7 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
     }
 
     .panel {
@@ -43,6 +44,12 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
     }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -56,6 +63,26 @@
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel > *:first-child { 
+      transform: translateY(-100%); 
+    }
+
+    .panel.open-active > *:first-child { 
+      transform: translateY(0); 
+    }
+
+    .panel > *:last-child { 
+      transform: translateY(100%); 
+    }
+
+    .panel.open-active > *:last-child { 
+      transform: translateY(0); 
     }
 
     .panel p {
@@ -70,6 +97,7 @@
     }
 
     .panel.open {
+      flex: 5;
       font-size: 40px;
     }
 
@@ -105,7 +133,27 @@
   </div>
 
   <script>
+    const panel = document.querySelectorAll('.panel');
 
+    function toggleOpen(e) {
+      // closes an 'open' panel when another panel is clicked
+      // original wesbos toggle retained
+      if (!this.classList.contains('open')) {
+        panel.forEach((e) => e.classList.remove('open'));
+        this.classList.toggle('open');
+      } else {
+        this.classList.toggle('open');
+      }
+    }
+
+    function toggleActive(e) {
+      if (e.propertyName.includes('flex')) {
+        this.classList.toggle('open-active');
+      } 
+    }
+
+    panel.forEach(e => e.addEventListener('click', toggleOpen));
+    panel.forEach(e => e.addEventListener('transitionend', toggleActive));
   </script>
 
 
