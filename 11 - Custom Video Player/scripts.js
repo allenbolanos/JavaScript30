@@ -61,20 +61,10 @@ playButton.addEventListener('click', playVideo);
 volumeSlider.addEventListener('mousemove', changeVolume);
 playbackSpeedSlider.addEventListener('mousemove', changePlaybackSpeed);
 
-back10SecondsButton.addEventListener('mousedown', () => {
-  if (video.paused) {
-    return
-  } else {
-    isBackwardClicked = true;
-  }
-});
+back10SecondsButton.addEventListener('mousedown', () => isBackwardClicked = true);
+back10SecondsButton.addEventListener('click', progressBarFunction);
 
-forward25SecondsButton.addEventListener('mousedown', () => {
-  if (video.paused) {
-    return;
-  } else {
-    isForwardClicked = true;
-  }
-});
+forward25SecondsButton.addEventListener('mousedown', () => isForwardClicked = true);
+forward25SecondsButton.addEventListener('click', progressBarFunction);
 
 progressContainer.addEventListener('click', clickProgressBar)
