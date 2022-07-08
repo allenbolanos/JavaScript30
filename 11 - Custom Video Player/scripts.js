@@ -2,23 +2,29 @@ const video = document.querySelector('video');
 const playButton = document.querySelector('.toggle');
 const volumeSlider = document.querySelector('input[name="volume"]');
 const playbackSpeedSlider = document.querySelector('input[name="playbackRate"]');
+const progressContainer = document.querySelector('.progress')
 const progress = document.querySelector('.progress__filled');
-const back10Seconds = document.querySelector('button[data-skip="-10"]');
-const forward25Seconds = document.querySelector('button[data-skip="25"]');
+const back10SecondsButton = document.querySelector('button[data-skip="-10"]');
+const forward25SecondsButton = document.querySelector('button[data-skip="25"]');
 
 let isPlaying = false;
 let videoTime = 0;
 let isForwardClicked = false;
 let isBackwardClicked = false;
+let isProgressClicked = false;
+
+function clickProgressBar(e) {
+  videoTime = (e.offsetX / progressContainer.offsetWidth) * video.duration;
+  video.currentTime = videoTime
+}
 
 function progressBarFunction() {
-  console.log(video.paused);
   if (isForwardClicked) {
-    videoTime = ((video.currentTime + Number(forward25Seconds.dataset.skip)) / video.duration) * 100;
+    videoTime = ((video.currentTime + Number(forward25SecondsButton.dataset.skip)) / video.duration) * 100;
     video.currentTime = video.currentTime + 25;
     isForwardClicked = false;
   } else if (isBackwardClicked) {
-    videoTime = ((video.currentTime - Number(back10Seconds.dataset.skip)) / video.duration) * 100;
+    videoTime = ((video.currentTime - Number(back10SecondsButton.dataset.skip)) / video.duration) * 100;
     video.currentTime = video.currentTime - 10;
     isBackwardClicked = false;
   } else {
@@ -55,7 +61,7 @@ playButton.addEventListener('click', playVideo);
 volumeSlider.addEventListener('mousemove', changeVolume);
 playbackSpeedSlider.addEventListener('mousemove', changePlaybackSpeed);
 
-back10Seconds.addEventListener('mousedown', () => {
+back10SecondsButton.addEventListener('mousedown', () => {
   if (video.paused) {
     return
   } else {
@@ -63,10 +69,12 @@ back10Seconds.addEventListener('mousedown', () => {
   }
 });
 
-forward25Seconds.addEventListener('mousedown', () => {
+forward25SecondsButton.addEventListener('mousedown', () => {
   if (video.paused) {
     return;
   } else {
     isForwardClicked = true;
   }
 });
+
+progressContainer.addEventListener('click', clickProgressBar)
