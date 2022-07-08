@@ -30,6 +30,10 @@ function progressBarFunction() {
   } else {
     videoTime = (video.currentTime / video.duration) * 100;
   }
+
+  if (video.ended) {
+    video.play()
+  }
   
   progress.style.flexBasis = `${videoTime}%`;
 }
