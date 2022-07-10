@@ -8,7 +8,7 @@
 <body>
 
   <form class="search-form">
-    <input type="text" class="search" placeholder="City or State" onchange="displayMatches">
+    <input type="text" class="search" placeholder="City or State">
     <ul class="suggestions">
       <li>Filter for a city</li>
       <li>or a state</li>
@@ -43,7 +43,7 @@
 
       return `
         <li>
-          <span class="name" style="border: 1px solid red ">${cityName}, ${stateName}</span>
+          <span class="name">${cityName}, ${stateName}</span>
           <span class="population">${numberWithCommas(e.population)}</span>
         </li>      
       `;
