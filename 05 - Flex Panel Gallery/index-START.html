@@ -133,13 +133,13 @@
   </div>
 
   <script>
-    const panel = document.querySelectorAll('.panel');
+    const panels = [...document.querySelectorAll('.panel')];
 
     function toggleOpen(e) {
       // closes an 'open' panel when another panel is clicked
       // original wesbos toggle retained
       if (!this.classList.contains('open')) {
-        panel.forEach((e) => e.classList.remove('open'));
+        panels.forEach((e) => e.classList.remove('open'));
         this.classList.toggle('open');
       } else {
         this.classList.toggle('open');
@@ -152,8 +152,8 @@
       } 
     }
 
-    panel.forEach(e => e.addEventListener('click', toggleOpen));
-    panel.forEach(e => e.addEventListener('transitionend', toggleActive));
+    panels.forEach(e => e.addEventListener('click', toggleOpen));
+    panels.forEach(e => e.addEventListener('transitionend', toggleActive));
   </script>
 
 
