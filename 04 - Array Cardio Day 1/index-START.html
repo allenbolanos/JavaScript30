@@ -37,36 +37,37 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-    const filter = inventors.filter(e => e.year <= 1599 && e.year >= 1500);
-    //console.log(filter);
+    const inventorsBornInThe1500s = inventors.filter(e => e.year <= 1599 && e.year >= 1500);
+    //console.log(inventorsBornInThe1500s);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
-    const map = inventors.map(e => ({first: e.first, last: e.last}));
-    //console.log(map);
+    const inventorsFirstAndLastNames = inventors.map(e => ({first: e.first, last: e.last}));
+    //console.log(inventorsFirstAndLastNames);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-    const sort = inventors.sort((a,b) => a.year - b.year);
-    //console.log(sort);
+    const inventorsSortedByBirthdate = inventors.sort((a,b) => a.year - b.year);
+    //console.log(inventorsSortedByBirthdate);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
-    const years = inventors.map(e => e.passed - e.year)
-    const reduce = years.reduce((a,b) => a + b, 0);
-    //console.log(reduce);
+    const inventorsTotalYearsLived = inventors.reduce((previousValue, currentValue) => {
+      return previousValue + (currentValue.passed - currentValue.year)
+    }, 0);
+    //console.log(inventorsTotalYearsLived);
 
     // 5. Sort the inventors by years lived
-    const sort2 = years.sort((a,b) => a - b);
-    //console.log(sort2);
+    const inventorsSortedByYearsLived = inventors.sort((a, b) => (a.passed - a.year) - (b.passed - b.year));
+    /* console.log(inventorsSortedByYearsLived); */
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
     // Selects all of the links under the class of .mw-category on the wikipedia website.
     
-    // Has to be entered manually on the wikipedia link that was provided and not on
-    // index-START.html otherwise, it would show an error warning on the console
+    // Has to be entered manually on the console while on the wikipedia link that was provided 
+    // and not on index-START.html otherwise, it would show an error warning on the console
 
     /* const category = document.querySelector('.mw-category');
     const links = [...category.querySelectorAll('a')];
@@ -78,13 +79,13 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    const sort3 = people.sort();
-    //console.log(sort3);
+    const peopleSortedByLastName = people.sort();
+    //console.log(peopleSortedByLastName);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-    const reduce2 = data.reduce((obj, item) => {
+    const tally = data.reduce((obj, item) => {
       if (!obj[item]) {
         obj[item] = 0;
       }
@@ -93,7 +94,7 @@
       return obj;
     }, {});
 
-    //console.log(reduce2);
+    //console.log(tally);
   </script>
 </body>
 </html>
