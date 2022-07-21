@@ -24,43 +24,39 @@
       { text: 'Nice Nice Nice!', id: 542328 }
     ];
 
-    // Some and Every Checks
-    // Array.prototype.some() // is at least one person 19 or older?
     const date = new Date();
     const currentYear = date.getFullYear();
-    const some = people.some(e => (currentYear - e.year) >= 19);
-    //console.log(some);
 
-    // returns an array of people with the age of 19 and above
-    /* const map = people
-                  .map(e => ({name: e.name, age: currentYear - e.year}))
-                  .filter(a => a.age > 19)
-    console.log(map); */
+    // Some and Every Checks
+    // Array.prototype.some() // is at least one person 19 or older?
+    const isThereAnAdult = people.some(e => (currentYear - e.year) >= 19);
+    //console.log(isThereAnAdult);
 
     // Array.prototype.every() // is everyone 19 or older?
-    const every = people.every(e => (currentYear - e.year) >= 19);
-    //console.log(every);
+    const areAllAdults = people.every(e => (currentYear - e.year) >= 19);
+    //console.log(areAllAdults);
 
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
-    const find = comments.find(e => e.id === 823423);
-    //console.log(find);
+    const findCommentsID = comments.find(e => e.id === 823423);
+    //console.log(findCommentsID);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
-    const findIndex = comments.findIndex(e => e.id === 823423);
-    //console.log(findIndex);
+    const commentIndex = comments.findIndex(e => e.id === 823423);
+    //console.log(commentIndex);
 
     // delete the comment with the ID of 823423
     // wesbos'
     const newComments = [
-      ...comments.slice(0, findIndex),
-      ...comments.slice(findIndex + 1)
+      ...comments.slice(0, commentIndex),
+      ...comments.slice(commentIndex + 1)
     ];
     //console.log(newComments);
 
-    // based on id not index
+    // My own code for returning the comments array without the object using the id 823423
+    // Commented out since its not using commentIndex
     /* const myDelete = comments.filter(e => e.id !== 823423);
     console.log(myDelete); */
 
