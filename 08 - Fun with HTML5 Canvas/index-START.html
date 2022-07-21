@@ -7,6 +7,68 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+  const canvas = document.querySelector('#draw');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  ctx.strokestyle = '#BADA55'; // color for the stroke
+  // makes the corners round
+  ctx.lineJoin = 'round'; 
+  ctx.lineCap = 'round';
+  ctx.lineWidth = 100;
+
+  // initial values
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+  let hue = 0;
+  let direction = true;
+
+  function draw(e) {
+    // runs when click and hold
+    if (!isDrawing) return; 
+
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+
+    ctx.beginPath(); //starts a new path
+    ctx.moveTo(lastX, lastY); // coordinates for the start point of the line
+    ctx.lineTo(e.offsetX, e.offsetY); // coordinates for the end point of the line
+    ctx.stroke(); // creates the stroke or the 'line' based on the coordinates
+
+    // array destructure
+    [lastX, lastY] = [e.offsetX, e.offsetY]; // updates the lastX and lastY values
+
+    // updates the hue
+    hue++;
+    if (hue >= 360) {
+      hue = 0;
+    }
+
+    // updates the line width
+    if (ctx.lineWidth <= 20) {
+      direction = true;
+    } else if (ctx.lineWidth >= 100) {
+      direction = false;
+    }
+
+    if (direction) {
+      ctx.lineWidth++;
+    } else {
+      ctx.lineWidth--;
+    }
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+  });
+
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', () => isDrawing = false);
+  canvas.addEventListener('mouseout', () => isDrawing = false);
+  
 </script>
 
 <style>
