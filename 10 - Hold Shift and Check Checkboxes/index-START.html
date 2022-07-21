@@ -95,7 +95,57 @@
     </div>
   </div>
 
-<script>
-</script>
+  <script>
+    const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+    let first;
+    let last;
+
+    function handleCheck(e) {
+      let inBetween = false; // default value of inBetween
+
+      // store first and last checkbox
+      if (first === undefined) {
+        first = this;
+      } else {
+        last = this;
+      }
+
+      if (e.shiftKey && first instanceof Object) {
+        checkboxes.forEach(element => {
+          if (element === first || element === last) {
+            inBetween = !inBetween;
+          }
+
+          if (inBetween) {
+            element.checked = true;
+          }
+        })
+      }
+
+      // Wesbos'
+      /* if (e.shiftKey && this.checked) {    
+        checkboxes.forEach(e => {
+          // loops through the checkboxes and everytime the if statement is satisfied,
+          // the value of inBetween is then set to true.
+          if (e === this || e === lastChecked) {
+            inBetween = !inBetween;
+          }
+          
+          // since we are going over every checkbox element, 
+          // whatever checkbox that is currently on and at the same time the inBetween value is true,
+          // the checkbox will be automatically checked.
+          if (inBetween) {
+            //console.log(inBetween);
+            e.checked = true;
+          }
+        })
+      }
+
+      lastChecked = this; */
+    }
+
+    checkboxes.forEach(e => e.addEventListener('click', handleCheck));
+  </script>
 </body>
 </html>
